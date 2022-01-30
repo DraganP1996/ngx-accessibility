@@ -1,30 +1,17 @@
 import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
+import { ButtonAriaLabelOptions } from './button-aria-label.model';
 
 @Directive({
   selector: '[buttonAriaLabelDirective]'
 })
 export class ButtonAriaLabelDirective implements OnInit {
 
-  // The main aria label of the button
-  @Input() mainAriaLabel!: string;
+  @Input('buttonAriaLabelDirective') options?: ButtonAriaLabelOptions = {
+    defaultAriaLabel: 'Clickable element',
+    temporaryAriaLabel: `Clicked`
+  };
 
-  // The temporary aria label to be read by the screen reader after the button is clicked
-  @Input() temporaryAriaLabel?: string
-
-  @HostListener( 'click' )
-  /**
-   * Temporary change the value of the button's aria label after the click event
-   */
-  temporaryChangeAriaLabel(): void {
-      const element = this._element.nativeElement as HTMLElement;
-
-      if (!this.temporaryAriaLabel) {
-          return;
-        }
-
-      element.setAttribute('aria-label', this.temporaryAriaLabel);
-      setTimeout(() => element.setAttribute('aria-label', this.mainAriaLabel), 3000);
-    }
+  private readonly DEFAULT_ARIA_LABEL_DURATION = 3000;
 
   constructor(
      private _element: ElementRef 
@@ -33,8 +20,22 @@ export class ButtonAriaLabelDirective implements OnInit {
   ngOnInit(): void {
     const element = this._element.nativeElement as HTMLElement;
 
-    element.setAttribute('aria-label', this.mainAriaLabel);
-    element.setAttribute('role', 'button');
+    element.setAttribute('aria-label', this.options!.defaultAriaLabel);
   }
+
+  @HostListener( 'click' )
+  /**
+   * Temporary change the value of the button's aria label after the click event
+   */
+  temporaryChangeAriaLabel(): void {
+      const element = this._element.nativeElement as HTMLElement;
+      const {defaultAriaLabel, temporaryAriaLabel, durationInMs} = this.options!;
+      const changeDuration = this.options && durationInMs
+        ? durationInMs
+        : this.DEFAULT_ARIA_LABEL_DURATION;
+
+      element.setAttribute('aria-label', temporaryAriaLabel);
+      setTimeout(() => element.setAttribute('aria-label', defaultAriaLabel), changeDuration);
+    }
 
 }

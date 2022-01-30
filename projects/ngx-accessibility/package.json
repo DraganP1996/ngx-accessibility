@@ -1,11 +1,28 @@
 {
   "name": "ngx-accessibility",
-  "version": "0.1.2",
+  "version": "0.1.12",
+  "description": "Angular directives and services to make accessibility management easier in your apps.",
+  "homepage": "https://github.com/DraganP1996/ngx-accessibility.git",
+  "author": "Dragan Petrovic",
+  "keywords": [
+    "angular",
+    "accessibility",
+    "directives",
+    "services"
+  ],
   "peerDependencies": {
-    "@angular/common": "^12.2.0",
-    "@angular/core": "^12.2.0"
+    "@angular/common": "^13.1.0",
+    "@angular/core": "^13.1.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DraganP1996/ngx-accessibility.git"
+  },
+  "license": "MIT",
+  "maintainers": [
+    "Dragan Petrovic <pdragan1996@gmail.com>"
+  ]
 }

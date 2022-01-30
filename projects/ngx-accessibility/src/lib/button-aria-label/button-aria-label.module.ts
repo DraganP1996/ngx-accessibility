@@ -10,6 +10,7 @@ import { ButtonAriaLabelDirective } from './button-aria-label.directive';
   ],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [ ButtonAriaLabelDirective ]
 })
 export class ButtonAriaLabelModule { }
