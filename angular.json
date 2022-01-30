@@ -1,0 +1,42 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "1a3d2fa0-d439-473c-a407-c69df68b1cbf"
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ngx-accessibility": {
+      "projectType": "library",
+      "root": "projects/ngx-accessibility",
+      "sourceRoot": "projects/ngx-accessibility/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-accessibility/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-accessibility/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-accessibility/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-accessibility/src/test.ts",
+            "tsConfig": "projects/ngx-accessibility/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-accessibility/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ngx-accessibility"
+}
